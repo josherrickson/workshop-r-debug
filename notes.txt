@@ -1,0 +1,64 @@
+Debugging
+========================================
+
+1) Manual - step through code or output print() commands
+  - binary search (check at halfway, then halfway, etc)
+
+2) Syntax highlighting and styles
+Use RStudio's built in support to help.
+Look at example 1
+   - Missing ", so highlighting all wrong
+   - Add ", fixes it.
+   - Remove ", reindent.
+
+3) traceback()
+ - Run example 2, traceback()
+ - Start at bottom of stack.
+     Add to stack everytime you enter a function.
+ - Use `edit(foo)` to see line numbers
+ - Limited use with builtin functions, e.g. traceback() on lm(y ~ x)
+
+4) The browser
+ - Putting browser() anywhere in code will stop at that point and enter browswer
+ - Show example 3
+ - Demonstrate Q, n, s (using buttons in RStudio).
+
+5) `debug` and `undebug`
+ - Also gets you into browser
+
+6) Preventing error
+ a) Checking input
+    - use if/stop
+    - Quickly use stopifnot
+    - tryCatch (example
+ b) Common errors
+    - 2 == sqrt(2)^2 vs all.equal(2, sqrt(2)^2)
+    - example 5 (NULL and NA checking)
+    - T and F
+    - subsetting matrix single column
+
+
+Profiling
+========================================
+
+1) RStudio's Profile -> Profile Selected Lines
+ - Demonstrate with summary(lm(price ~ clarity + color + cut + depth + table + carat, data = diamonds))
+  - **(After loading ggplot2)**
+ - Show flame graph
+
+2) Show example 6
+ - It's a simulation to show whether rounding up in some data adds bias.
+ - Walk through code.
+ - Run code with profiling.
+ - Show two bottlenecks - `c()` and `lm()`
+
+3) Let's optimize
+ - Show microbenchmark with example 7
+ - Runs fast code many times.
+ - Replace `lm` with `.lm.fit` (Example 8 has it)
+ - Relplace `c()` with pre-created vector
+
+4) A few comments
+ - `mean()` is ridiculously slow! Example 9
+ - Working with matrices is faster than data.frames, can convert to DF later.
+ - Optimize and debug on subset of large data.
